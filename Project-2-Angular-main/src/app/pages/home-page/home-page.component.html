@@ -1,0 +1,60 @@
+<app-header></app-header>
+<div class="allpage">
+    <div class="all">
+        <div class="categoriestitle">
+            <h1>categories</h1>             
+        </div> 
+        <div class="categories">
+            <app-categories (Products)="reciveSent($event)"></app-categories>            
+        </div>
+
+        <div class="flist">
+            <div class="filter">
+                <div>
+                    <p class="Filtertitle">Filter</p>
+                    <div class="slider-container">
+                       <p class="a">Spiciness {{spiciness}}</p>
+                      <input type="range" (input)="spicinessChange()" [(ngModel)]="spicinessValue" min="0" max="5" class="slider" id="myRange" >
+                    </div>
+                    <div class="checkbox1" >
+                        <input type="checkbox" [(ngModel)]="nuts">
+                        <p>Nuts</p>
+                    </div>
+                    <div class="checkbox2" >
+                        <input type="checkbox" [(ngModel)]="vegie">
+                        <p>Vegetarian only</p>
+                    </div>
+                        <div class="red-box1" (click)="reset()"><h4 class="RBT1">RESET</h4></div>
+                        <div class="red-box2" (click)="apply()"><h4 class="RBT2">APPLY FILTER</h4></div>    
+                    </div>
+                </div>
+            <div class="list">
+                <div class="card" *ngFor="let item of productshow">
+                    <div class="b">
+                        <img class="productimage" [src]="item.image" [alt]="">
+                        <h3>{{item.name}}</h3>
+                        <p class="spiciness">Spiciness: {{item.spiciness}}</p>
+                        <div class="infos">
+                            <div class="nuts" *ngIf="item.nuts">
+                                <p>With Nuts</p>
+                            </div>
+                            <div class="vegetarians" *ngIf="item.vegeterian">
+                                <p>Vegetarian</p>
+                            </div>                
+                        </div>
+                        <div class="pbtn">
+                            <h1>{{item.price}} $</h1>
+                            <button (click)="productsService.addToBasket(item.id)">Add To Cart</button>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+</div>
+
+</div>
+<div class="nopapa">
+    <app-footer></app-footer>
+</div>
+
